@@ -1,0 +1,646 @@
+/* ==========================================================================
+   Charte graphique Business O2 — voir CHARTE_GRAPHIQUE.md
+   ========================================================================== */
+:root {
+  /* --- Charte officielle Business Club Group --- */
+  --couleur-primaire: #00263F;   /* bleu marine officiel */
+  --couleur-accent:   #CEC1A6;   /* sable / or (usage sur fond FONCÉ) */
+  --accent-fonce:     #97865E;   /* sable foncé (accent lisible sur fond CLAIR) */
+  --fond-page:        #FAF7EF;   /* crème très clair */
+  --texte:            #1A1A1A;
+
+  --bordure-carte:      #DCD3BF;
+  --bordure-pointilles: #C4B99E;
+  --texte-secondaire:   #5F5E5A;
+  --texte-tertiaire:    #8C8674;
+  --fond-neutre:        #F4E8D1;   /* crème officiel — blocs neutres */
+
+  --raci-R: #0C447C;
+  --raci-A: #085041;
+  --raci-C: #854F0B;
+
+  --info-fond: #E6F1FB;  --info-bordure: #378ADD;  --info-texte: #0C447C;
+  --warn-fond: #FAEEDA;  --warn-bordure: #EF9F27;  --warn-texte: #633806;
+
+  /* Polices officielles (repli propre si non installées / hors ligne) */
+  --police-titre: "NT Joséphine", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --police-texte: "Montserrat", "Segoe UI", Calibri, Candara, sans-serif;
+
+  --radius-sm: 6px; --radius: 8px; --radius-md: 10px; --radius-lg: 12px; --radius-pill: 20px;
+  --ombre-panneau: -4px 0 20px rgba(0,0,0,0.15);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--police-texte);
+  color: var(--texte);
+  background: var(--fond-page);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- En-tête ---- */
+.app-header {
+  background: var(--couleur-primaire);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.app-header__title { font-family: var(--police-titre); color: #fff; font-size: 20px; }
+.app-header__subtitle { color: var(--couleur-accent); font-size: 13px; margin-top: 3px; }
+
+.tabs { display: flex; background: rgba(255,255,255,0.1); border-radius: var(--radius); padding: 3px; }
+.tab {
+  border: none; background: transparent; color: #fff;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 13px; cursor: pointer; font-family: var(--police-texte);
+}
+.tab--active { background: var(--couleur-accent); color: var(--couleur-primaire); font-weight: 700; }
+
+/* ---- Zone principale ---- */
+.app-main { padding: 24px; flex: 1; max-width: 1200px; width: 100%; margin: 0 auto; }
+
+.section-title {
+  font-family: var(--police-titre); font-size: 16px;
+  color: var(--couleur-primaire); margin: 24px 0 12px;
+}
+.section-title:first-child { margin-top: 0; }
+
+/* ---- Couloirs (lanes) ---- */
+.lane {
+  border: 1.5px dashed var(--bordure-pointilles);
+  border-radius: var(--radius-lg);
+  padding: 16px 16px 20px;
+  margin-bottom: 20px;
+}
+.lane__title { font-family: var(--police-titre); font-size: 16px; color: var(--couleur-primaire); margin-bottom: 12px; }
+.lane__flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.arrow { color: var(--bordure-pointilles); flex-shrink: 0; font-size: 16px; }
+
+/* ---- Chips d'étape ---- */
+.chip {
+  border: 1px solid var(--bordure-pointilles);
+  background: #fff; color: var(--texte);
+  border-radius: var(--radius); padding: 9px 12px;
+  font-size: 13px; cursor: pointer; text-align: left;
+  min-width: 130px; line-height: 1.3; font-family: var(--police-texte);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.chip:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+.chip__code { font-size: 11px; color: var(--texte-tertiaire); display: block; }
+.chip__module { font-size: 11px; margin-top: 2px; opacity: .75; }
+
+/* variantes couleur de module */
+.chip--coral  { background:#FAECE7; border-color:#D85A30; color:#712B13; }
+.chip--teal   { background:#E1F5EE; border-color:#0F6E56; color:#04342C; }
+.chip--purple { background:#EEEDFE; border-color:#534AB7; color:#26215C; }
+
+/* ---- Cartes de module ---- */
+.module-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+.module-card {
+  flex: 1 1 200px; border-radius: var(--radius-md); padding: 16px;
+  text-align: left; cursor: pointer; border: 1px solid; font-family: var(--police-texte);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.module-card:hover { transform: translateY(-2px); box-shadow: 0 3px 12px rgba(0,0,0,0.10); }
+.module-card--coral  { background:#FAECE7; border-color:#D85A30; color:#712B13; }
+.module-card--teal   { background:#E1F5EE; border-color:#0F6E56; color:#04342C; }
+.module-card--purple { background:#EEEDFE; border-color:#534AB7; color:#26215C; }
+.module-card__title { font-weight: 700; font-size: 15px; }
+.module-card__sub { font-size: 12px; margin-top: 4px; opacity: .8; }
+.module-card__count { font-size: 12px; margin-top: 10px; }
+
+/* ---- Page d'accueil (cartes) ---- */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.home-card {
+  text-align: left; background: #fff; border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius-md); padding: 20px; cursor: pointer;
+  font-family: var(--police-texte); display: flex; flex-direction: column; gap: 6px;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.home-card--util { background: var(--fond-neutre); }
+.home-card:hover { transform: translateY(-2px); box-shadow: 0 3px 14px rgba(0,0,0,0.10); }
+.home-card__icon { font-size: 28px; }
+.home-card__title { font-family: var(--police-titre); font-size: 16px; color: var(--couleur-primaire); }
+.home-card__desc { font-size: 12.5px; color: var(--texte-secondaire); line-height: 1.5; flex: 1; }
+.home-card__go { font-size: 13px; color: var(--accent-fonce); font-weight: 700; margin-top: 4px; }
+
+/* ---- Cartes des 3 types de prospection ---- */
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px; margin-bottom: 20px;
+}
+.type-card {
+  text-align: left; background: var(--fond-neutre); border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius-md); padding: 14px; cursor: pointer; font-family: var(--police-texte);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.type-card:hover { transform: translateY(-2px); box-shadow: 0 3px 12px rgba(0,0,0,0.10); }
+.type-card--active { border-color: var(--couleur-primaire); background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+.type-card__icon { font-size: 22px; }
+.type-card__label { font-weight: 700; font-size: 14px; color: var(--couleur-primaire); margin-top: 4px; }
+.type-card__desc { font-size: 12px; color: var(--texte-secondaire); margin-top: 4px; line-height: 1.45; }
+
+/* ---- Pages de contenu ---- */
+.page-section { margin-bottom: 14px; }
+
+/* ---- Sélecteur d'affichage (logigramme / liste) ---- */
+.layout-toggle { display: flex; gap: 6px; margin-bottom: 16px; }
+.ltbtn {
+  border: 1px solid var(--bordure-carte); background: #fff; color: var(--texte-secondaire);
+  border-radius: var(--radius-pill); padding: 7px 16px; font-size: 13px; cursor: pointer; font-family: var(--police-texte);
+}
+.ltbtn--active { background: var(--couleur-primaire); color: #fff; border-color: var(--couleur-primaire); font-weight: 700; }
+
+/* ---- Liste déroulée : étape-bouton + RACI/fréquence/livrables ---- */
+.vlist { display: flex; flex-direction: column; gap: 10px; }
+.vstep {
+  display: flex; justify-content: space-between; align-items: stretch; gap: 20px;
+  text-align: left; width: 100%; background: #fff; border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius-md); padding: 14px 16px; cursor: pointer; font-family: var(--police-texte);
+  transition: border-color .08s ease, box-shadow .08s ease;
+}
+.vstep:hover { border-color: var(--couleur-primaire); box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+.vstep__left { flex: 1; min-width: 0; }
+.vstep__title { font-size: 14.5px; font-weight: 700; color: var(--couleur-primaire); }
+.vstep__code { color: var(--texte-tertiaire); font-weight: 400; font-size: 12px; }
+.vstep__more { color: var(--accent-fonce); font-size: 12px; font-weight: 400; }
+.vstep__desc { font-size: 12.5px; color: var(--texte-secondaire); margin-top: 4px; line-height: 1.45; }
+.vstep__right {
+  flex: 0 0 340px; max-width: 340px; border-left: 1px solid var(--bordure-carte); padding-left: 16px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.vraci { display: flex; flex-direction: column; gap: 3px; }
+.vraci-line { display: flex; align-items: flex-start; gap: 6px; font-size: 11.5px; color: var(--texte-secondaire); }
+.vraci-line .raci-badge { width: 16px; height: 16px; font-size: 9px; flex-shrink: 0; margin-top: 1px; }
+.vmeta { font-size: 11.5px; color: var(--texte-tertiaire); }
+.vliv { font-size: 11.5px; color: var(--texte-secondaire); line-height: 1.4; }
+
+/* ---- Logigramme ---- */
+.logi { display: flex; flex-direction: column; align-items: center; }
+.logi-step {
+  background: #fff; border: 1px solid var(--couleur-primaire); color: var(--couleur-primaire);
+  border-radius: var(--radius); padding: 9px 14px; font-size: 13px; cursor: pointer;
+  font-family: var(--police-texte); text-align: center; max-width: 420px;
+}
+.logi-step:hover { background: var(--couleur-primaire); color: #fff; }
+.logi-q {
+  background: var(--fond-neutre); border: 1.5px dashed var(--accent-fonce); color: #6b5a2e;
+  border-radius: var(--radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 700;
+}
+.logi-conn { color: var(--bordure-pointilles); font-size: 18px; line-height: 1; padding: 4px 0; }
+.logi-branches { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; align-items: flex-start; }
+.logi-branch { display: flex; flex-direction: column; gap: 8px; align-items: center; background: #F6F5F1; border-radius: var(--radius-md); padding: 12px; }
+.logi-branch__label { font-size: 12px; font-weight: 700; color: var(--accent-fonce); }
+
+/* ---- Cartes des 3 types de prospection ---- */
+.types-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.type-card {
+  text-align: left; background: var(--fond-neutre); border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius-md); padding: 14px; cursor: pointer; font-family: var(--police-texte);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.type-card:hover { transform: translateY(-2px); box-shadow: 0 3px 12px rgba(0,0,0,0.10); }
+.type-card--active { border-color: var(--couleur-primaire); background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+.type-card__icon { font-size: 22px; }
+.type-card__label { font-weight: 700; font-size: 14px; color: var(--couleur-primaire); margin-top: 4px; }
+.type-card__desc { font-size: 12px; color: var(--texte-secondaire); margin-top: 4px; line-height: 1.45; }
+
+/* ---- Annexes (bonnes pratiques) ---- */
+.accordion__chev { color: var(--couleur-primaire); font-size: 14px; }
+.an-sub { font-size: 13px; font-weight: 700; color: var(--couleur-primaire); margin: 10px 0 4px; }
+.an-text { font-size: 12.5px; line-height: 1.6; margin: 0 0 6px; color: var(--texte); }
+.an-mail { background: #fff; border: 1px solid var(--bordure-carte); border-radius: var(--radius); padding: 10px 12px; margin: 8px 0; }
+.an-mail__obj { font-size: 12px; font-weight: 700; color: var(--info-texte); margin-bottom: 6px; }
+.an-mail__body { font-size: 12px; line-height: 1.65; white-space: pre-line; color: var(--texte); }
+
+/* ---- Liens annexes dans le détail ---- */
+.annexe-links { display: flex; flex-direction: column; gap: 6px; }
+.annexe-link { font-size: 13px; color: var(--couleur-primaire); text-decoration: underline; cursor: pointer; }
+.annexe-link:hover { color: var(--accent-fonce); }
+
+/* ---- Bloc RACI (modalités) ---- */
+.raci-block { background: var(--fond-neutre); border: 1px solid var(--bordure-carte); border-radius: var(--radius-md); padding: 12px 16px; margin: 14px 0 18px; }
+.raci-block__title { font-family: var(--police-titre); font-size: 14px; color: var(--couleur-primaire); margin-bottom: 8px; }
+
+/* ---- Légende catégories (vue par acteur) ---- */
+.legend--cats { margin-bottom: 14px; }
+.cat-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+/* ---- Pages de contenu ---- */
+.page-section { margin-bottom: 14px; }
+
+/* ---- Bouton retour ---- */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 6px; background: none; border: none;
+  color: var(--texte-secondaire); font-size: 13px; cursor: pointer; margin-bottom: 16px;
+  padding: 0; font-family: var(--police-texte);
+}
+.back-btn:hover { color: var(--couleur-primaire); }
+
+/* ---- Vue module (liste) ---- */
+.step-list { display: flex; flex-direction: column; gap: 8px; }
+.step-row {
+  text-align: left; background: #fff; border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius); padding: 11px 14px; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-size: 13px; font-family: var(--police-texte);
+}
+.step-row:hover { border-color: var(--couleur-primaire); }
+.step-row__meta { font-size: 11px; color: var(--texte-tertiaire); margin-top: 2px; }
+
+/* ---- Vue par acteur ---- */
+.role-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.role-pill {
+  border: 1px solid var(--bordure-carte); background: #fff; color: var(--texte);
+  border-radius: var(--radius-pill); padding: 7px 15px; font-size: 13px; cursor: pointer;
+  font-family: var(--police-texte);
+}
+.role-pill--active { background: var(--couleur-primaire); color: #fff; border-color: var(--couleur-primaire); }
+.hint { color: var(--texte-secondaire); font-size: 13px; }
+
+.raci-badges { display: flex; gap: 4px; flex-shrink: 0; }
+.raci-badge {
+  color: #fff; font-size: 11px; font-weight: 700; border-radius: 4px;
+  width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+}
+.raci-badge--R { background: var(--raci-R); }
+.raci-badge--A { background: var(--raci-A); }
+.raci-badge--C { background: var(--raci-C); }
+.raci-badge--I { background: var(--raci-I); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 4px 0 18px; font-size: 12px; color: var(--texte-secondaire); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend .raci-badge { width: 18px; height: 18px; font-size: 10px; }
+
+/* ---- Panneau de détail (drawer) ---- */
+.drawer-overlay {
+  position: fixed; inset: 0; background: rgba(0,36,60,0.4);
+  display: flex; justify-content: flex-end; z-index: 50;
+}
+.drawer-overlay[hidden] { display: none; }
+.drawer {
+  background: #fff; width: min(520px, 94vw); height: 100%;
+  padding: 24px; overflow-y: auto; box-shadow: var(--ombre-panneau);
+}
+.drawer__head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+.drawer__code { font-size: 12px; color: var(--texte-tertiaire); }
+.drawer__title { font-family: var(--police-titre); font-size: 18px; color: var(--couleur-primaire); padding-right: 12px; }
+.drawer__close { background: none; border: none; cursor: pointer; font-size: 22px; color: var(--texte-secondaire); line-height: 1; padding: 0 4px; }
+.drawer__close:hover { color: var(--couleur-primaire); }
+
+.raci-grid { display: grid; grid-template-columns: auto 1fr; row-gap: 9px; column-gap: 12px; font-size: 13px; margin: 14px 0; }
+.raci-grid dt { color: var(--texte-tertiaire); white-space: nowrap; }
+.raci-grid dd { margin: 0; }
+
+.objectif {
+  font-size: 13px; font-style: italic; color: var(--texte-secondaire);
+  border-left: 3px solid var(--accent-fonce); padding-left: 10px; margin: 16px 0;
+}
+
+.box { border-radius: var(--radius); padding: 10px 12px; font-size: 12.5px; margin: 10px 0; line-height: 1.55; }
+.box--info { background: var(--info-fond); border: 1px solid var(--info-bordure); color: var(--info-texte); }
+.box--warn { background: var(--warn-fond); border: 1px solid var(--warn-bordure); color: var(--warn-texte); }
+.box--neutral { background: var(--fond-neutre); color: var(--texte-secondaire); }
+
+.etape { margin-bottom: 16px; }
+.etape__titre { font-size: 13.5px; font-weight: 700; color: var(--couleur-primaire); margin-bottom: 5px; }
+.etape__acteur { font-size: 11px; color: var(--texte-tertiaire); margin-bottom: 6px; }
+.etape ul { margin: 0; padding-left: 18px; }
+.etape li { font-size: 12.5px; line-height: 1.6; margin-bottom: 4px; }
+
+.subhead { font-size: 13.5px; font-weight: 700; color: var(--couleur-primaire); margin: 18px 0 8px; }
+
+.accordion { background: var(--fond-neutre); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
+.accordion__btn {
+  width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+  padding: 10px 12px; font-family: var(--police-texte); display: flex; flex-direction: column; gap: 3px;
+}
+.accordion__cas { font-size: 12.5px; font-weight: 700; color: var(--info-texte); }
+.accordion__objets { font-size: 11.5px; color: var(--texte-secondaire); }
+.accordion__body {
+  padding: 10px 12px 12px; font-size: 12.5px; line-height: 1.65; white-space: pre-line;
+  border-top: 1px solid var(--bordure-carte);
+}
+.accordion__body[hidden] { display: none; }
+
+.drawer-btn {
+  margin-top: 14px; width: 100%; border: none; border-radius: var(--radius);
+  padding: 11px 14px; font-size: 13px; cursor: pointer; font-family: var(--police-texte);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.drawer-btn--primary { background: var(--couleur-primaire); color: #fff; }
+.drawer-btn--outline { background: #fff; color: var(--couleur-primaire); border: 1.5px solid var(--couleur-primaire); font-weight: 700; }
+
+.tag-list { list-style: none; padding: 0; margin: 6px 0 0; }
+.tag-list li { font-size: 12.5px; line-height: 1.6; margin-bottom: 5px; padding-left: 16px; position: relative; }
+.tag-list li::before { content: "•"; position: absolute; left: 2px; color: var(--accent-fonce); }
+
+/* ---- Pied de page ---- */
+.app-footer {
+  background: var(--couleur-primaire); color: #fff; font-size: 12px;
+  padding: 10px 24px; display: flex; justify-content: space-between; align-items: center;
+}
+.app-footer__conf { color: var(--couleur-accent); }
+
+/* ---- Intro page d'accueil ---- */
+.home-intro {
+  font-size: 13.5px; color: var(--texte-secondaire); line-height: 1.55;
+  background: var(--fond-neutre); border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 18px;
+}
+
+/* ---- Glossaire ---- */
+.glossaire { display: flex; flex-direction: column; gap: 6px; }
+.glo-row { display: flex; gap: 14px; background: #fff; border: 1px solid var(--bordure-carte); border-radius: var(--radius); padding: 9px 14px; }
+.glo-sigle { flex: 0 0 90px; font-weight: 700; color: var(--couleur-primaire); font-size: 13px; }
+.glo-def { font-size: 13px; color: var(--texte); }
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .app-header { flex-direction: column; align-items: flex-start; }
+  .app-main { padding: 16px; }
+  .drawer { width: 100vw; padding: 18px; }
+  .vstep { flex-direction: column; gap: 10px; }
+  .vstep__right { flex-basis: auto; max-width: none; border-left: none; border-top: 1px solid var(--bordure-carte); padding-left: 0; padding-top: 10px; }
+  .glo-row { flex-direction: column; gap: 2px; }
+}
+
+/* ========================================================================== 
+   AUTHENTIFICATION — Styles minimalistes du login
+   ========================================================================== */
+
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--couleur-primaire) 0%, #0C2A47 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.auth-box {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 36, 63, 0.25);
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-box__title {
+  margin: 0 0 0.75rem;
+  color: var(--couleur-primaire);
+  font-size: 28px;
+  font-family: var(--police-titre);
+  font-weight: 700;
+}
+
+.auth-box__subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--texte-secondaire);
+  font-size: 14px;
+  font-family: var(--police-texte);
+}
+
+.auth-input {
+  padding: 0.875rem;
+  border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: var(--police-texte);
+  color: var(--texte);
+  background: #fff;
+  width: 100%;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 1rem;
+}
+
+.auth-input::placeholder {
+  color: var(--texte-tertiaire);
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--couleur-primaire);
+  box-shadow: 0 0 0 3px rgba(0, 38, 63, 0.08);
+}
+
+.auth-btn-submit {
+  padding: 0.875rem;
+  background: var(--couleur-primaire);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--police-texte);
+  font-size: 14px;
+  width: 100%;
+}
+
+.auth-btn-submit:hover {
+  background: #0C2A47;
+  box-shadow: 0 4px 12px rgba(0, 38, 63, 0.2);
+  transform: translateY(-1px);
+}
+
+.auth-btn-submit:active {
+  transform: translateY(0);
+}
+
+.auth-error {
+  color: #cc5555;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-top: -0.5rem;
+  display: none;
+}
+
+.auth-error--show {
+  display: block;
+}
+
+.app-header__logout {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 107, 107, 0.85);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--police-texte);
+  transition: background 0.3s ease;
+}
+
+.app-header__logout:hover {
+  background: rgba(255, 107, 107, 1);
+}
+
+/* ---- Recherche ---- */
+.search-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1;
+  max-width: 600px;
+}
+
+#search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 13px;
+  font-family: var(--police-texte);
+  placeholder-color: rgba(255, 255, 255, 0.6);
+}
+
+#search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#search-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+#search-clear {
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--police-texte);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+#search-input:not(:placeholder-shown) ~ #search-clear {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#search-clear:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Résultats de recherche ---- */
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-result {
+  background: white;
+  border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-result:hover {
+  border-color: var(--couleur-primaire);
+  box-shadow: 0 2px 8px rgba(0, 38, 63, 0.1);
+  transform: translateY(-1px);
+}
+
+.search-result.search-result--glossaire {
+  pointer-events: none;
+}
+
+.search-result__title {
+  font-weight: 600;
+  color: var(--couleur-primaire);
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.search-result__type {
+  font-size: 11px;
+  color: var(--accent-fonce);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.search-result__excerpt {
+  font-size: 12px;
+  color: var(--texte-secondaire);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* ---- Bouton Réinitialiser ---- */
+.reset-btn {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--accent-fonce);
+  border-radius: var(--radius);
+  color: var(--accent-fonce);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--police-texte);
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: var(--fond-neutre);
+  border-color: var(--couleur-primaire);
+  color: var(--couleur-primaire);
+}
+
+/* ---- Accessibilité accordéons ---- */
+.accordion__btn {
+  width: 100%;
+  text-align: left;
+  background: white;
+  border: 1px solid var(--bordure-carte);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--police-texte);
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.accordion__btn:hover {
+  background: var(--fond-neutre);
+  border-color: var(--couleur-primaire);
+}
+
+.accordion__btn:focus {
+  outline: 2px solid var(--couleur-primaire);
+  outline-offset: 2px;
+}

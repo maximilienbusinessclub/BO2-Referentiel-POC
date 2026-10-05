@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business O2 — Référentiel des processus</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .auth-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--couleur-primaire) 0%, #0C2A47 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+    .auth-box { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 36, 63, 0.25); width: 100%; max-width: 420px; }
+    .auth-box h1 { margin: 0 0 0.75rem; color: var(--couleur-primaire); font-size: 28px; font-family: var(--police-titre); font-weight: 700; }
+    .auth-box p { margin: 0 0 1.5rem; color: var(--texte-secondaire); font-size: 14px; }
+    .auth-form { display: flex; flex-direction: column; gap: 1rem; }
+    .auth-input { padding: 0.875rem; border: 1px solid var(--bordure-carte); border-radius: var(--radius); font-size: 14px; color: var(--texte); background: #fff; width: 100%; }
+    .auth-input:focus { outline: none; border-color: var(--couleur-primaire); box-shadow: 0 0 0 3px rgba(0, 38, 63, 0.08); }
+    .auth-btn { padding: 0.875rem; background: var(--couleur-primaire); color: white; border: none; border-radius: var(--radius); font-weight: 600; cursor: pointer; font-size: 14px; width: 100%; }
+    .auth-btn:hover { background: #0C2A47; }
+    .auth-error { color: #cc5555; font-size: 13px; display: none; }
+    .auth-error.show { display: block; }
+    #app-wrapper { display: none; }
+    .app-header__logout { padding: 0.5rem 1rem; background: rgba(255, 107, 107, 0.85); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; }
+    .app-header__logout:hover { background: rgba(255, 107, 107, 1); }
+  </style>
+</head>
+<body>
+  <div id="auth-overlay" class="auth-overlay">
+    <div class="auth-box">
+      <h1>🔐 Business O2</h1>
+      <p>Accès au référentiel des processus</p>
+      <form class="auth-form" onsubmit="handleAuth(event)">
+        <input type="password" id="access-code" class="auth-input" placeholder="Code d'accès" required>
+        <button type="submit" class="auth-btn">Accéder</button>
+        <div id="auth-error" class="auth-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="app-wrapper">
+    <header class="app-header">
+      <div><h1 class="app-header__title">Business O2 — Référentiel des processus</h1></div>
+      <nav class="tabs" id="tabs"></nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="🔎 Rechercher dans le référentiel..." />
+        <button id="search-clear" type="button" title="Effacer la recherche">✕</button>
+      </div>
+      <button class="app-header__logout" onclick="handleLogout()">Déconnexion</button>
+    </header>
+    <main class="app-main" id="main"></main>
+    <div class="drawer-overlay" id="drawer-overlay" hidden><div class="drawer" id="drawer"></div></div>
+    <footer class="app-footer"><span>Business O2 — Transformation des processus</span><span class="app-footer__conf">Application v1.1 · Book v5 — 22/09/2026</span></footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    const ACCESS_CODE = 'MANORG-BO2';
+    const SESSION_KEY = 'bo2_access_granted';
+
+    function handleAuth(event) {
+      event.preventDefault();
+      const code = document.getElementById('access-code').value;
+      const errorDiv = document.getElementById('auth-error');
+      if (code === ACCESS_CODE) {
+        localStorage.setItem(SESSION_KEY, 'true');
+        showApp();
+      } else {
+        errorDiv.textContent = 'Code incorrect';
+        errorDiv.classList.add('show');
+        setTimeout(() => errorDiv.classList.remove('show'), 3000);
+      }
+    }
+
+    function showApp() {
+      document.getElementById('auth-overlay').style.display = 'none';
+      document.getElementById('app-wrapper').style.display = 'block';
+      if (typeof initTabs === 'function') initTabs();
+      if (typeof render === 'function') render();
+    }
+
+    function showLogin() {
+      document.getElementById('auth-overlay').style.display = 'flex';
+      document.getElementById('app-wrapper').style.display = 'none';
+    }
+
+    function handleLogout() {
+      localStorage.removeItem(SESSION_KEY);
+      showLogin();
+    }
+
+    window.addEventListener('load', () => {
+      if (localStorage.getItem(SESSION_KEY) === 'true') {
+        showApp();
+      } else {
+        showLogin();
+      }
+    });
+  </script>
+</body>
+</html>
